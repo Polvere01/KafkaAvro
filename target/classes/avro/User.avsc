@@ -1,0 +1,9 @@
+{"namespace": "br.com.eventos.loja",
+ "type": "record",
+ "name": "User",
+ "fields": [
+     {"name": "nome", "type": "string"},
+     {"name": "numero_favorito",  "type": ["int", "null"]},
+     {"name": "cor_favorita", "type": ["string", "null"]}
+ ]
+}

@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ConsumerProduto {
-//
-//    @KafkaListener(topics = "topic1", groupId = "group_id")
-//    public void (ConsumerRecord<String, >)
+
+    @KafkaListener(topics = "topic3", groupId = "group_id")
+    public void consume(ConsumerRecord<String, User> record) {
+        System.out.println("ok");
+    }
 }

@@ -78,19 +78,42 @@
 
 	<build>
 		<plugins>
-<!--			<plugin>-->
-<!--				<groupId>io.confluent</groupId>-->
-<!--				<artifactId>kafka-schema-registry-maven-plugin</artifactId>-->
-<!--				<version>5.4.0</version>-->
-<!--				<configuration>-->
-<!--					<schemaRegistryUrls>-->
-<!--						<param>http://localhost:8081</param>-->
-<!--					</schemaRegistryUrls>-->
-<!--				</configuration>-->
-<!--				<goals>-->
-<!--					<goal>test-compatibility</goal>-->
-<!--				</goals>-->
-<!--			</plugin>-->
+			<plugin>
+				<groupId>org.apache.avro</groupId>
+				<artifactId>avro-maven-plugin</artifactId>
+				<version>1.8.2</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>schema</goal>
+						</goals>
+						<configuration>
+							<sourceDirectory>src/main/resources/avro</sourceDirectory>
+
+							<outputDirectory>${project.build.directory}/generated-sources</outputDirectory>
+							<stringType>String</stringType>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>io.confluent</groupId>
+				<artifactId>kafka-schema-registry-maven-plugin</artifactId>
+				<version>5.4.0</version>
+				<configuration>
+					<schemaRegistryUrls>
+						<param>http://localhost:8081</param>
+					</schemaRegistryUrls>
+					<outputDirectory>src/main/resources/avro</outputDirectory>
+					<subjectPatterns>
+					<param>^TestSubject000-(key|value)$</param>
+				</subjectPatterns>
+				</configuration>
+				<goals>
+					<goal>test-compatibility</goal>
+				</goals>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
