@@ -79,6 +79,11 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
 				<groupId>org.apache.avro</groupId>
 				<artifactId>avro-maven-plugin</artifactId>
 				<version>1.8.2</version>
@@ -87,10 +92,10 @@
 						<phase>generate-sources</phase>
 						<goals>
 							<goal>schema</goal>
+
 						</goals>
 						<configuration>
 							<sourceDirectory>src/main/resources/avro</sourceDirectory>
-
 							<outputDirectory>${project.build.directory}/generated-sources</outputDirectory>
 							<stringType>String</stringType>
 						</configuration>
@@ -107,17 +112,14 @@
 					</schemaRegistryUrls>
 					<outputDirectory>src/main/resources/avro</outputDirectory>
 					<subjectPatterns>
-					<param>^TestSubject000-(key|value)$</param>
-				</subjectPatterns>
+						<param>^TestSubject000-(key|value)$</param>
+					</subjectPatterns>
 				</configuration>
 				<goals>
 					<goal>test-compatibility</goal>
 				</goals>
 			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+
 		</plugins>
 	</build>
 
