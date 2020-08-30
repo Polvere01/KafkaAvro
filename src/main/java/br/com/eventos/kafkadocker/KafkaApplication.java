@@ -8,19 +8,20 @@ public class KafkaApplication {
 
     public static void main(String[] args) {
 
-        //Properties props = new Properties();
-        //props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        //props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.StringSerializer.class);
-        //props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.StringSerializer.class);
-        //props.put("schema.registry.url", "http://localhost:8081");
+        //Criando as propriedades para conexão do kafka
+        Properties props = new Properties();
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.StringSerializer.class);
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.StringSerializer.class);
 
-        //KafkaProducer<String, String> producer = new KafkaProducer(props);
+        KafkaProducer<String, String> producer = new KafkaProducer(props);
 
-       // ProducerRecord<String, String> record = new ProducerRecord<>("topic1", "Ola Heitor");
+        //Tópico e a mensagem
+        ProducerRecord<String, String> record = new ProducerRecord<>("topic1", "Ola mundo");
 
-        //producer.send(record);
+        producer.send(record);
 
-        //producer.close();
+        producer.close();
 
         SpringApplication.run(KafkaApplication.class, args);
     }
